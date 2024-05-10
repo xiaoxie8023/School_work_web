@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的博客系统</title>
+    <!-- 引入外部CSS文件 -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- 自定义CSS -->
+    <style>
+        body, h1, h2, h3, p { margin: 0; padding: 0; }
+        body { font-family: 'Arial', sans-serif; line-height: 1.6; }
+
+        /* 导航栏样式 */
+.nav {
+    background: #333; /* 背景颜色 */
+    color: #fff; /* 文字颜色 */
+    overflow: hidden; /* 确保内容不会溢出 */
+    display: flex; /* 使用弹性盒子布局 */
+    justify-content: space-between; /* 让内容在水平方向上分散对齐 */
+    align-items: center; /* 垂直方向上居中对齐 */
+    padding: 10px 20px; /* 内边距 */
+}
+
+/* 导航链接样式 */
+.nav a {
+    color: #fff; /* 文字颜色 */
+    padding: 14px 20px; /* 内边距 */
+    display: inline-block; /* 使链接占据其父元素的宽度 */
+    text-decoration: none; /* 移除下划线 */
+    transition: background-color 0.3s; /* 背景颜色变化的过渡效果 */
+}
+
+.nav a:hover, .nav a:focus { /* 鼠标悬停和聚焦时的样式 */
+    background-color: #ddd; /* 背景颜色变亮 */
+    color: black; /* 文字颜色变暗 */
+}
+
+/* 社交链接样式 */
+.social-links {
+    display: flex; /* 使用弹性盒子布局 */
+}
+
+.social-links a {
+    margin: 0 5px; /* 社交图标之间的间距 */
+    font-size: 1.5em; /* 图标大小 */
+    color: #fff; /* 图标颜色 */
+    text-decoration: none; /* 移除下划线 */
+    transition: color 0.3s; /* 颜色变化的过渡效果 */
+}
+
+.social-links a:hover {
+    color: #ddd; /* 鼠标悬停时图标颜色变亮 */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .nav, .nav a {
+        flex-direction: column; /* 在小屏幕上堆叠导航链接 */
+        width: 100%;
+        text-align: center; /* 文本居中 */
+    }
+
+    .nav a {
+        padding: 10px; /* 调整内边距以适应堆叠布局 */
+        border-top: 1px solid #444; /* 添加边框以区分链接 */
+    }
+
+    .social-links a {
+        font-size: 1.2em; /* 在小屏幕上减小图标大小 */
+    }
+}
+/* 个人信息容器 */
+.personal-info {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto; /* 水平居中 */
+}
+
+/* 头像容器 */
+.avatar-container {
+    margin-bottom: 20px;
+}
+
+/* 头像图片 */
+.avatar {
+    width: 150px; /* 头像尺寸 */
+    height: 150px; /* 头像尺寸 */
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 4px solid #28a745; /* 头像边框颜色 */
+}
+
+/* 简介、成就、粉丝数等文本样式 */
+.info-bio, .info-achievements, .info-followers, .certifications {
+    margin-bottom: 15px;
+}
+
+/* 粉丝数特别强调 */
+.followers-count {
+    font-weight: bold;
+    color: #28a745;
+    margin-left: 5px;
+}
+
+/* 技能标签样式 */
+.skills-tags .tag {
+    display: inline-block;
+    background-color: #e9ecef;
+    color: #007bff;
+    padding: 5px 10px;
+    margin: 2px 2px 2px 0;
+    border-radius: 5px;
+    font-size: 0.8em;
+}
+
+/* 项目链接样式 */
+.project-experience ul li a {
+    display: inline-block;
+    margin-left: 10px;
+    text-decoration: none;
+    color: #007bff;
+}
+
+/* 社交链接样式 */
+.social-links a {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #007bff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.social-links a:hover {
+    background-color: #0056b3;
+}
+
+/* 邮箱链接样式 */
+.email-link {
+    background-color: #28a745;
+}
+
+.email-link:hover {
+    background-color: #218838;
+}
+
+/* 邮箱图标样式 */
+.email-link .fas {
+    margin-right: 5px;
+}
+
+/* GitHub图标样式 */
+.github-link .fab {
+    margin-right: 5px;
+}
+
+/* 统计信息样式 */
+.info-stats {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-stats span {
+    margin: 0 3px;
+}
+
+/* 教育背景样式 */
+.info-education {
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+/* 个人理念或座右铭样式 */
+.info-motto {
+    font-size: 0.9em;
+    margin-bottom: 15px;
+    border-left: 3px solid #28a745;
+    padding-left: 10px;
+    font-style: italic;
+    color: #333;
+}
+
+/* 标签和统计数字样式 */
+.tag, .stats-count {
+    background-color: #e9ecef;
+    color: #007bff;
+    padding: 3px 5px;
+    border-radius: 3px;
+    margin-right: 2px;
+}
+
+/* 响应式设计调整 */
+@media (max-width: 768px) {
+    .info-stats, .info-education, .info-motto, .project-experience {
+        text-align: center;
+    }
+}
+/* 热门博客标签样式 */
+.hot-blogs-tag {
+    display: inline-block;
+    background-color: #ffc107; /* 背景颜色 */
+    color: #333; /* 文字颜色 */
+    font-size: 1em; /* 字体大小 */
+    padding: 8px 15px; /* 内边距 */
+    border-radius: 5px; /* 边框圆角 */
+    margin-bottom: 20px; /* 与博客列表的间距 */
+    font-weight: bold; /* 字体加粗 */
+}
+
+.hot-blogs-tag i {
+    margin-right: 8px; /* 图标与文本的间距 */
+    font-size: 1.2em; /* 适当放大图标 */
+}
+
+/* 确保博客列表有足够的间距 */
+.blog-list {
+    margin-top: 30px;
+}
+   /* 博客列表容器样式 */
+   .blog-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 0 20px;
+        }
+
+        /* 博客摘要样式 */
+        .blog-summary {
+            width: calc(33.333% - 20px); /* 3个博客摘要每行 */
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            margin-right: 10px; /* 右边距 */
+            background-clip: padding-box; /* 防止背景覆盖到边框 */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 博客图片样式 */
+       .blog-image img {
+      width: 100%; /* 宽度为容器的100% */
+      max-height: 200px; /* 设置图片的最大高度 */
+      object-fit: cover; /* 如果图片原始尺寸比容器小，此属性可以保持图片的宽高比 */
+      border-radius: 5px;
+      margin-bottom: 15px;
+     }
+        .blog-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        /* 博客标题和文本样式 */
+        .blog-summary h2 {
+            margin-bottom: 10px;
+            font-size: 1.2em; /* 统一标题大小 */
+        }
+
+        .blog-summary p {
+            font-size: 1em; /* 统一文本大小 */
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        /* 博客元数据样式 */
+        .blog-meta {
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #666;
+            display: flex;
+            align-items: center; /* 垂直居中 */
+            justify-content: center; /* 水平居中 */
+        }
+
+        .blog-meta span {
+            margin-right: 10px;
+        }
+
+        /* 社交分享按钮样式 */
+        .social-sharing a {
+            display: inline-block;
+            padding: 5px 10px;
+            margin: 2px;
+            background: #e9ecef;
+            color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+
+        .social-sharing a:hover {
+            background: #007bff;
+            color: #fff;
+        }
+
+        /* 查看更多链接样式 */
+        .detail {
+            display: inline-block;
+            background: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            text-align: center;
+            justify-self: center; /* 居中显示 */
+        }
+
+        .detail:hover {
+            background: #218838;
+        }
+
+        /* 小屏幕响应式样式 */
+        @media (max-width: 768px) {
+            .blog-summary {
+                width: 100%;
+                margin-right: 0;
+            }
+        }
+
+        /* 返回顶部按钮样式 */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #008000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 8px 15px;
+            z-index: 999;
+            display: none;
+        }
+/* 页脚样式增强 */
+footer {
+    background: #333;
+    color: #fff;
+    display: flex;
+    flex-direction: column; /* 使子元素垂直排列 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px; /* 与内容区域的间距 */
+    min-height: 200px; /* 确保页脚有足够的高度 */
+    width: 100%;
+}
+/* 页脚内容盒子 */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 社交媒体图标样式 */
+.social-icons {
+    list-style: none; /* 移除列表默认样式 */
+    padding: 0;
+    margin: 0;
+}
+
+.social-icons a {
+    display: inline-block; /* 内联块级展示 */
+    margin: 0 5px; /* 图标间距 */
+    font-size: 1.5em; /* 图标大小 */
+    color: #fff; /* 图标颜色 */
+    text-decoration: none; /* 移除下划线 */
+    transition: color 0.3s; /* 颜色变化过渡效果 */
+}
+
+.social-icons a:hover {
+    color: #ddd; /* 鼠标悬停时颜色变亮 */
+}
+
+/* 页脚链接样式 */
+.footer-links a {
+    display: inline-block; /* 内联块级展示 */
+    margin: 0 10px; /* 链接间距 */
+    color: #fff; /* 文字颜色 */
+    text-decoration: none; /* 移除下划线 */
+    transition: color 0.3s; /* 颜色变化过渡效果 */
+    margin: 0 5px;
+}
+
+.footer-links a:hover {
+    color: #ddd; /* 鼠标悬停时颜色变亮 */
+}
+
+/* 版权信息样式 */
+.copyright {
+    margin-top: 10px; /* 与社交图标的间距 */
+    font-size: 0.8em; /* 字体大小 */
+}
+/* 返回顶部按钮样式调整 */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #008000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 15px;
+    z-index: 1000; /* 确保按钮在页脚之上 */
+}
+
+/* 确保页脚始终在视口底部 */
+footer {
+    position: relative;
+}
+
+    </style>
+</head>
+<body>
+   <!-- 导航栏 -->
+<div class="nav">
+    <img src="/img/blog.png" alt="Blog Icon" style="max-width: 60px; height: auto;">
+    <span class="title">我的博客系统</span>
+    <a href="blog_list.html">主页</a>
+    <a href="blog_edit.html">写博客</a>
+    <a href="about.html">关于</a> 
+    <a href="archive.html">归档</a> 
+    <a href="categories.html">分类</a> 
+    <a href="search.html">搜索</a> 
+    <a href="contact.html">联系方式</a> 
+    <a href="login.html">登录</a> 
+    <a href="signup.html">注册</a> 
+    <a href="logout.html">注销</a>
+    <!-- 社交链接 -->
+    <div class="social-links">
+        <a href="#" target="_blank" title="微博"><i class="fab fa-weibo"></i></a>
+        <a href="#" target="_blank" title="微信公众号"><i class="fab fa-weixin"></i></a>
+        <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</div>
+   <!-- 个人信息 -->
+    <div class="personal-info card">
+        <div class="avatar-container">
+            <img src="/img/xiaoxie6.png" class="avatar" alt="Avatar">
+        </div>
+        <div class="info-text">
+            <h3>小谢</h3>
+            <p class="info-bio">简介：全栈开发者，专注于Java技术栈，热爱开源文化，致力于通过技术解决实际问题。</p>
+            <p class="info-achievements"><i class="fas fa-trophy"></i> 成就：优秀开发者，开源贡献者</p>
+            <p class="info-followers"><i class="fas fa-users"></i> 粉丝数：<span class="followers-count">50000</span></p>
+            <div class="skills-tags">
+                <h4>专注的领域</h4>
+                <span class="tag">Java</span>
+                <span class="tag">Spring Boot</span>
+                <span class="tag">Git</span>
+                <span class="tag">MySQL</span>
+                <span class="tag">redis</span>
+                <span class="tag">Linux</span>
+                <span class="tag">kafka</span>
+                <span class="tag">Mybatis</span>
+                <span class="tag">Maven</span>
+                <span class="tag">数据结构</span>
+            </div>
+            <div class="project-experience">
+                <h4>最近项目</h4>
+                <ul>
+                    <li><a href="https://github.com/xiaoxie8023/Study" target="_blank">https://github.com/xiaoxie8023/Study/projest</a>: 参与某后端框架开源项目的设计与实现。</li>
+                </ul>
+            </div>
+            <p class="certifications"><i class="fas fa-certificate"></i> 荣誉与证书：Oracle Certified Java Programmer, 2023年度最佳开源贡献奖</p>
+            
+            <!-- 新增博客统计信息 -->
+            <p class="info-stats">
+                <i class="fas fa-thumbs-up"></i> 总点赞数：<span class="stats-count">15000</span> |
+                <i class="fas fa-star"></i> 总收藏数：<span class="stats-count">8000</span>
+            </p>
+    
+            <!-- 新增教育背景 -->
+            <p class="info-education">
+                <i class="fas fa-graduation-cap"></i> 教育背景：太原工业学院大二软工专业就读
+            </p>
+    
+            <!-- 新增个人理念或座右铭 -->
+            <p class="info-motto">
+                <i class="fas fa-quote-left"></i> 个人理念：学无止境，创新无限
+            </p>
+    
+            <div class="social-links">
+                <a href="https://github.com/xiaoxie8023/Study" target="_blank" class="github-link"><i class="fab fa-github"></i>小谢的GitHub地址</a>
+                <a href="mailto:xiaoxie@example.com" class="email-link"><i class="fas fa-envelope"></i> 小谢的QQ邮箱</a>
+            </div>
+        </div>
+    </div>
+    <!-- 热门博客标签 -->
+<div class="hot-blogs-tag">
+    <i class="fas fa-fire"></i> 小谢的热门博客
+</div>
+   <!-- 博客列表 -->
+<div class="blog-list">
+    <!-- 博客摘要1 -->
+    <div class="blog-summary">
+        <div class="blog-image">
+            <img src="/img/blog1.jpg" alt="Blog 1 Image">
+        </div>
+        <h2>我的第一篇博客</h2>
+        <p>探究AI对计算机行业的影响</p>
+        <div class="blog-meta">
+            <span><i class="fas fa-eye"></i> 浏览 20.6K</span>
+            <span><i class="fas fa-thumbs-up"></i> 点赞 8790 </span>
+            <span><i class="fas fa-star"></i> 收藏 5809</span>
+        </div>
+        <div class="social-sharing">
+            <a href="#" class="weixing">分享到微信朋友圈</a>
+            <a href="#" class="QQ">分享到QQ空间</a>
+        </div>
+        <a href="blog_content.html?blogId=1" class="detail">查看全文 &gt;&gt;</a>
+    </div>
+     <!-- 博客摘要2 -->
+     <div class="blog-summary">
+        <div class="blog-image">
+            <img src="/img/blog2.jpg" alt="Blog 2 Image">
+        </div>
+        <h2>我的第二篇博客</h2>
+        <p>探究AI技术的发展以及应用场景</p>
+        <div class="blog-meta">
+            <span><i class="fas fa-eye"></i> 浏览 3.9K</span>
+            <span><i class="fas fa-thumbs-up"></i> 点赞 1230</span>
+            <span><i class="fas fa-star"></i> 收藏 825</span>
+        </div>
+        <div class="social-sharing">
+            <a href="#" class="weixing">分享到微信朋友圈</a>
+            <a href="#" class="QQ">分享到QQ空间</a>
+        </div>
+        <a href="blog_content.html?blogId=1" class="detail">查看全文 &gt;&gt;</a>
+    </div>
+ <!-- 博客摘要3 -->
+ <div class="blog-summary">
+    <div class="blog-image">
+        <img src="/img/bolg3_java.jpg" alt="Blog 3 Image">
+    </div>
+    <h2>我的第三篇博客</h2>
+    <p>一文带你Java从入门到精通</p>
+    <div class="blog-meta">
+        <span><i class="fas fa-eye"></i> 浏览 10.5K</span>
+        <span><i class="fas fa-thumbs-up"></i> 点赞 2230</span>
+        <span><i class="fas fa-star"></i> 收藏 3890</span>
+    </div>
+    <div class="social-sharing">
+        <a href="#" class="weixing">分享到微信朋友圈</a>
+        <a href="#" class="QQ">分享到QQ空间</a>
+    </div>
+    <a href="blog_content.html?blogId=1" class="detail">查看全文 &gt;&gt;</a>
+</div>
+ <!-- 博客摘要4 -->
+ <div class="blog-summary">
+    <div class="blog-image">
+        <img src="/img/blog4.jpg" alt="Blog 4 Image">
+    </div>
+    <h2>我的第四篇博客</h2>
+    <p>机器学习,深入探究深度学习算法的知识和应用场景</p>
+    <div class="blog-meta">
+        <span><i class="fas fa-eye"></i> 浏览 8.3K</span>
+        <span><i class="fas fa-thumbs-up"></i> 点赞 2130</span>
+        <span><i class="fas fa-star"></i> 收藏 730</span>
+    </div>
+    <div class="social-sharing">
+        <a href="#" class="weixing">分享到微信朋友圈</a>
+        <a href="#" class="QQ">分享到QQ空间</a>
+    </div>
+    <a href="blog_content.html?blogId=1" class="detail">查看全文 &gt;&gt;</a>
+</div>
+ <!-- 博客摘要5 -->
+ <div class="blog-summary">
+    <div class="blog-image">
+        <img src="/img/blog5.jpg" alt="Blog 5 Image">
+    </div>
+    <h2>我的第五篇博客</h2>
+    <p>机器学习,深入探究Q_learning算法的知识和应用场景</Q></p>
+    <div class="blog-meta">
+        <span><i class="fas fa-eye"></i> 浏览 9.6K</span>
+        <span><i class="fas fa-thumbs-up"></i> 点赞 2100</span>
+        <span><i class="fas fa-star"></i> 收藏  1700</span>
+    </div>
+    <div class="social-sharing">
+        <a href="#" class="weixing">分享到微信朋友圈</a>
+        <a href="#" class="QQ">分享到QQ空间</a>
+    </div>
+    <a href="blog_content.html?blogId=1" class="detail">查看全文 &gt;&gt;</a>
+</div>
+<!-- 博客摘要6 -->
+<div class="blog-summary">
+    <div class="blog-image">
+        <img src="/img/blog6_web.jpg" alt="Blog 6 Image">
+    </div>
+    <h2>我的第六篇博客</h2>
+    <p>一文带你前端从入门到精通</p>
+    <div class="blog-meta">
+        <span><i class="fas fa-eye"></i> 浏览 9.3K</span>
+        <span><i class="fas fa-thumbs-up"></i> 点赞 2300</span>
+        <span><i class="fas fa-star"></i> 收藏 1587</span>
+    </div>
+    <div class="social-sharing">
+        <a href="#" class="weixing">分享到微信朋友圈</a>
+        <a href="#" class="QQ">分享到QQ空间</a>
+    </div>
+    <a href="blog_content6.html" class="detail">查看全文 &gt;&gt;</a> 
+</div>
+<div>
+    <button id="back-to-top">返回顶部</button>
+</div>
+<footer>
+    <div class="footer-content">
+        <div class="social-icons">
+            <!-- 微信图标链接，通常是一个引导到微信二维码的链接 -->
+            <a href="javascript:void(0)" target="_blank" class="weixin" title="微信">
+                <i class="fab fa-weixin"></i>
+            </a>
+            <!-- 微博图标链接 -->
+            <a href="http://weibo.com" target="_blank" title="微博">
+                <i class="fab fa-weibo"></i>
+            </a>
+            <!-- QQ空间图标链接 -->
+            <a href="http://qzone.qq.com" target="_blank" title="QQ空间">
+                <i class="fab fa-qq"></i>
+            </a>
+        </div>
+        <div class="footer-links">
+            <a href="#">关于我们</a>
+            <a href="#">服务条款</a>
+            <a href="#">隐私政策</a>
+        </div>
+        <p class="copyright">&#169; 2024 小谢的博客系统</p>
+        <!-- 动态年份 -->
+        <script>
+            document.write(new Date().getFullYear());
+        </script> 小谢的版权所有
+    </div>
+</footer>
+    <!-- 引入Bootstrap的JavaScript文件 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    <script>
+        // 返回顶部按钮逻辑
+        window.addEventListener('scroll', function() {
+            var scrollTopButton = document.getElementById('back-to-top');
+            if (window.scrollY > 100) {
+                scrollTopButton.style.display = 'block';
+            } else {
+                scrollTopButton.style.display = 'none';
+            }
+        });
+        
+        document.getElementById('back-to-top').addEventListener('click', function() {
+            window.scrollTo(0, 0);
+        });
+        /* 动态年份不显示时，可以注释掉或删除以下script标签 */
+    document.write(new Date().getFullYear());
+</script>
+</body>
+</html>

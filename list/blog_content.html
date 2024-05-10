@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的博客系统</title>
+    <!-- 引入导航栏样式表 -->
+    <link rel="stylesheet" href="nav.css">
+    <!-- 引入博客内容样式表 -->
+    <link rel="stylesheet" href="blog_content.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <img src="/img/blog.png" alt="Blog Logo">
+        <span class="title">我的博客系统</span>
+        <span class="spacer"></span>
+        <a href="blog_list.html">主页</a>
+        <a href="blog_edit.html">写博客</a>
+        <a href="logout.html">注销</a>
+    </div>
+    <!-- 页面内容容器 -->
+    <div class="container">
+        <!-- 左侧个人信息 -->
+        <div class="container-left">
+            <div class="card">
+                <img src="/img/xiaoxie.png" class="avatar" alt="Avatar">
+                <h3>小谢</h3>
+                <a href="https://github.com/xiaoxie8023/Study" target="_blank">GitHub地址</a>
+                <div class="counter">
+                    <span>文章</span>
+                    <span>分类</span>
+                </div>
+                <div class="counter">
+                    <span>2</span>
+                    <span>1</span>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧内容详情 -->
+        <div class="container-right">
+            <div class="blog-content">
+                <h3>我的第一篇博客</h3>
+                <div class="date">2024-05-04</div>
+                <p>
+                 从今天起我要好好敲代码. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut recusandae omnis natus ut! Autem alias ullam sit facilis ipsa dolore, molestiae neque aperiam in a facere dolor mollitia dolorum animi.
+                </p>
+                <!-- 其他段落 -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

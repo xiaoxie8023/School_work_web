@@ -1,0 +1,56 @@
+* 登录容器 */
+.login-container {
+    width: 100%;
+    height: calc(100vh - 50px); /* 视口高度减去导航栏高度 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 登录对话框 */
+.login-dialog {
+    width: 400px;
+    height: 300px; /* 可以根据需要调整 */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 登录对话框标题 */
+.login-dialog h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 登录表单行 */
+.login-dialog .row {
+    margin-bottom: 15px;
+}
+
+/* 输入框 */
+#username,
+#password {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* 确保内边距和边框不增加宽度 */
+}
+
+/* 登录按钮 */
+#submit {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit:hover {
+    background-color: #4cae4c;
+}

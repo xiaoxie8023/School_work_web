@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客编辑器</title>
+    <link rel="stylesheet" href="./blog_edit.css">
+    <!-- 引入导航栏样式表 -->
+    <link rel="stylesheet" href="nav.css">
+    <!-- 引入 editor.md 的样式表 -->
+    <link rel="stylesheet" href="editor.md-master/css/editormd.min.css" />
+    <!-- 如果 editor.md 使用了 FontAwesome 图标库，则引入 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <img src="/img/blog.png" alt="Blog Logo">
+        <span class="title">我的博客系统</span>
+        <span class="spacer"></span>
+        <a href="blog_list.html">主页</a>
+        <a href="blog_edit.html">写博客</a>
+        <a href="logout.html">注销</a>
+    </div>
+</div>
+<!-- 编辑框容器 -->
+<div class="blog-edit-container">
+    <!-- 标题编辑区 -->
+    <div class="title">
+        <input type="text" placeholder="在这里写下文章标题" id="title">
+        <button id="submit">发布文章</button>
+    </div>
+    <!-- 创建编辑器标签 -->
+    <div id="editor"></div>
+</div>
+
+<!-- 引入 editor.md 的核心JavaScript文件 -->
+<script src="editor.md-master/editormd.min.js"></script>
+<!-- 使用原生 JavaScript 初始化 editor.md 编辑器 -->
+<script>
+    // 监听 DOM 完全加载完成
+    document.addEventListener('DOMContentLoaded', function() {
+        // 初始化 editor.md 编辑器
+        var editor = editormd("editor", {
+            path : "editor.md-master/lib/", // Autoload modules mode, codemirror, marked... dependents libs path
+            height : 720,
+            theme : "default",
+            watch : true,
+            toolbarIcons : function() {
+                return ["undo", "redo", "|", "bold", "del", "italic", "quote", "uppercase", "lowercase", "|",
+                        "h1", "h2", "h3", "h4", "h5", "h6", "|", "list-ul", "list-ol", "hr", "|",
+                        "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table",
+                        "datetime", "emoji", "html-entities", "pagebreak", "|", "goto-line", "watch", "preview", "fullscreen", "clear", "search", "help"];
+            },
+        });
+    });
+</script>
+</body>
+</html>
